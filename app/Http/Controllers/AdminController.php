@@ -68,6 +68,14 @@ class AdminController extends Controller
         $food->save();
         return redirect()->back();
 
+        $image = $request->image;
+        $image_name = time().'.'. $image->getClientOriginalExtension();
+        $request->image->move('foodimage',$image_name);
+        $food->image = $image_name;
+
+        $food->save();
+        return redirect()->back();
+
     }
 
 }
