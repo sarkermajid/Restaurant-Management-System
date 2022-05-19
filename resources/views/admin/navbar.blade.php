@@ -24,11 +24,11 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/tables/basic-table.html">
+        <a class="nav-link" href="{{ url('/view_reservation') }}">
           <span class="menu-icon">
             <i class="mdi mdi-table-large"></i>
           </span>
-          <span class="menu-title">Chefs</span>
+          <span class="menu-title">Reservations</span>
         </a>
       </li>
       <li class="nav-item menu-items">
@@ -36,7 +36,7 @@
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
-          <span class="menu-title">Reservations</span>
+          <span class="menu-title">Chefs</span>
         </a>
       </li>
     </ul>

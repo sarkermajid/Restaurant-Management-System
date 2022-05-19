@@ -17,13 +17,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/redirects', [HomeController::class, 'redirects']);
+
+// for user route
 Route::get('/users', [AdminController::class, 'users']);
 Route::get('/user_delete/{id}', [AdminController::class, 'user_delete']);
+
+// for food items route
 Route::get('/food', [AdminController::class, 'food']);
 Route::post('/upload_food', [AdminController::class, 'upload_food']);
 Route::get('/food_delete/{id}', [AdminController::class, 'food_delete']);
 Route::get('/food_edit/{id}', [AdminController::class, 'food_edit']);
 Route::post('/food_update/{id}', [AdminController::class, 'food_update']);
+
+// for reservation route
+Route::post('/reservation', [AdminController::class, 'reservation']);
+Route::get('/view_reservation', [AdminController::class, 'view_reservation']);
+Route::get('/delete_reservation/{id}', [AdminController::class, 'delete_reservation']);
 
 Route::middleware([
     'auth:sanctum',
