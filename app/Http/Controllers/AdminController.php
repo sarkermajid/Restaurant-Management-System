@@ -62,12 +62,13 @@ class AdminController extends Controller
         $food->price = $request->price;
         $food->description = $request->description;
 
-        // image upload
+        // image update
         $image = $request->image;
-        $image_name = time().'.'. $image->getClientOriginalExtension();
-        $request->image->move('foodimage',$image_name);
-        $food->image = $image_name;
-
+        if($image){
+            $image_name = time().'.'. $image->getClientOriginalExtension();
+            $request->image->move('foodimage',$image_name);
+            $food->image = $image_name;    
+        }
         $food->save();
         return redirect()->back();
 
@@ -101,7 +102,8 @@ class AdminController extends Controller
     }
 
     public function chefs(){
-        return view('admin.chefs');
+        $view_chefs = Chefs::all();
+        return view('admin.chefs',compact('view_chefs'));
     }
 
     public function add_chefs(Request $request){
@@ -117,6 +119,33 @@ class AdminController extends Controller
         
         $add_chefs->save();
         return redirect()->back();
-        
+    }
+
+    public function chef_edit($id){
+        $chef_edit = Chefs::find($id);
+        return view('admin.chef_edit',compact('chef_edit'));
+    }
+
+    public function chef_update(Request $request, $id){
+        $chef = Chefs::find($id);
+
+        $chef->name = $request->name;
+        $chef->speciality = $request->speciality;
+
+        //image update
+        $image = $request->image;
+        if($image){
+            $image_name = time().'.'. $image->getClientOriginalExtension();
+            $request->image->move('chefsimage',$image_name);
+            $chef->image = $image_name;
+        }
+        $chef->save();
+        return redirect()->back();
+    }
+
+    public function chef_delete($id){
+        $chef_delete = Chefs::find($id);
+        $chef_delete->delete();
+        return redirect()->back();
     }
 }

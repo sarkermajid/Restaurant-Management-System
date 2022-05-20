@@ -31,6 +31,32 @@
               </div>
             <button type="submit" class="btn btn-primary">Save</button>
           </form>
+          <br>
+          <h3 class="display-3 text-center">Chefs List</h3>
+          <hr class="text-info">
+          <div class="mb-5">
+            <table class="table table-stripe">
+              <tr>
+                <th>Chef Name</th>
+                <th>Chef Speciality</th>
+                <th>Chef Image</th>
+                <th class="text-center">Action</th>
+              </tr>
+
+              @foreach ($view_chefs as $item)
+              <tr>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->speciality }}</td>
+                <td><img src="/chefsimage/{{ $item->image }}" alt=""></td>
+                <td>
+                  <a href="{{ url('/chef_edit/'.$item->id) }}" class="btn btn-primary">Edit</a>
+                  <a href="{{ url('/chef_delete/'.$item->id) }}" class="btn btn-danger">Delete</a>
+                </td>
+              </tr>
+              @endforeach
+
+            </table>
+          </div>
     </div>
     @include('admin.jslink')
   </body>
