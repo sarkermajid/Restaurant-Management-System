@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chefs;
 use App\Models\User;
 use App\Models\Food;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class AdminController extends Controller
 {
@@ -98,4 +100,23 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function chefs(){
+        return view('admin.chefs');
+    }
+
+    public function add_chefs(Request $request){
+        $add_chefs = new Chefs;
+        $add_chefs->name = $request->name;
+        $add_chefs->speciality = $request->speciality;
+
+        // image upload
+        $image = $request->image;
+        $image_name = time().'.'. $image->getClientOriginalExtension();
+        $request->image->move('chefsimage',$image_name);
+        $add_chefs->image = $image_name;
+        
+        $add_chefs->save();
+        return redirect()->back();
+        
+    }
 }
