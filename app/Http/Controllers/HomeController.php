@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Food;
+use Carbon\CarbonPeriod;
 
 class HomeController extends Controller
 {
@@ -50,5 +51,18 @@ class HomeController extends Controller
         }else{
             return redirect('/login');
         }
+    }
+
+    public function view_cart(Request $request, $id){
+        $count = Cart::where('user_id',$id)->count();
+        $cart_info = Cart::where('user_id',$id)->join('food','carts.food_id', '=' , 'food.id')->get();
+        $cart_number_id = Cart::select('*')->where('user_id', '=', $id)->get();
+        return view('view_cart',compact('count','cart_info','cart_number_id'));
+    }
+
+    public function remove_cart($id){
+        $remove_cart = Cart::find($id);
+        $remove_cart->delete();
+        return redirect()->back();
     }
 }

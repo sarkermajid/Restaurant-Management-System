@@ -81,12 +81,17 @@ https://templatemo.com/tm-558-klassy-cafe
                                     <li><a href="#">Features Page 4</a></li>
                                 </ul>
                             </li> --}}
-                            <li class="scroll-to-section"><a href="#menu">
+                            <li class="scroll-to-section">
+
                                 @auth
-                                Cart  [{{ $count }}]
+                                <a href="{{ url('/view_cart/'. Auth::user()->id) }}">
+                                    Cart  [{{ $count }}]
+                                </a>
                                 @endauth
                                 @guest
-                                Cart [0]
+                                <a href="#">
+                                    Cart [0]
+                                </a>
                                 @endguest
                             </a>
                             </li> 

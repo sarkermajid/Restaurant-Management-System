@@ -43,7 +43,8 @@ Route::get('/chef_delete/{id}', [AdminController::class, 'chef_delete']);
 
 // for cart route
 Route::post('/add_cart/{id}', [HomeController::class, 'add_cart']);
-
+Route::get('/view_cart/{id}', [HomeController::class, 'view_cart']);
+Route::get('/remove_cart/{id}', [HomeController::class, 'remove_cart']);
 
 
 Route::middleware([
