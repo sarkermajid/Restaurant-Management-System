@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Food;
+use App\Models\Order;
 use Carbon\CarbonPeriod;
 
 class HomeController extends Controller
@@ -63,6 +64,23 @@ class HomeController extends Controller
     public function remove_cart($id){
         $remove_cart = Cart::find($id);
         $remove_cart->delete();
+        return redirect()->back();
+    }
+
+    public function order_confirm(Request $request){
+        foreach($request->foodname as $key => $foodname)
+        
+        {
+            $order_confirm = new Order;
+            $order_confirm->foodname = $foodname;
+            $order_confirm->price = $request->price[$key];
+            $order_confirm->quantity = $request->quantity[$key];
+            $order_confirm->name = $request->name;
+            $order_confirm->phone = $request->phone;
+            $order_confirm->address = $request->address;
+
+            $order_confirm->save();
+        }
         return redirect()->back();
     }
 }

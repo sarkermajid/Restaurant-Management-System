@@ -30,6 +30,8 @@ https://templatemo.com/tm-558-klassy-cafe
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     </head>
     
     <body>
@@ -138,35 +140,83 @@ https://templatemo.com/tm-558-klassy-cafe
                     <th style="padding: 30px">Food Quantity</th>
                     <th style="padding: 30px">Action</th>
                 </tr>
+
+                <form action="{{ url('/order_confirm') }}" method="post">
+                    @csrf
                 @foreach ($cart_info as $item)
                 <tr>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->price }}</td>
-                    <td>{{ $item->quantity }}</td>
+                    
+                    <td>
+                        <input type="text" name="foodname[]" value="{{ $item->title }} " hidden>
+                        {{ $item->title }}
+                    </td>
+                    <td>
+                        <input type="text" name="price[]" value="{{ $item->price }} " hidden>
+                        {{ $item->price }}
+                    </td>
+                    <td>
+                        <input type="text" name="quantity[]" value="{{ $item->quantity }} " hidden>
+                        {{ $item->quantity }}
+                    </td>
                 </tr>
                 @endforeach
 
 
                 @foreach ($cart_number_id as $item )
-                <tr style='position:relative;top: -70px;
+                <tr style='position:relative;top: -100px;
                 right: -81%;'>
                 <td><a href="{{ url('/remove_cart/'.$item->id) }}" class="btn btn-danger btn-sm">Remove</a></td>
                 </tr>
                 @endforeach
             </table>
         </div>
+
+        <div class="col-md-10 text-center">
+            <button class="btn btn-info btn-larg" type="button" id="order_now" style="background-color: green; color: white" >Order Now</button>
+        </div>
+
+        <div id="appear" class="col-md-4" style="display: none;">
+                <div class="mb-3">
+                  <label>Name</label>
+                  <input type="text" name="name" class="form-control" id="">
+                </div>
+                <div class="mb-3">
+                    <label>Phone</label>
+                    <input type="text" name="phone" class="form-control" id="">
+                </div>
+                <div class="mb-3">
+                    <label>Address</label>
+                    <input type="text" name="address" class="form-control" id="">
+                </div>
+                <div>
+                   <button type="submit" class="btn btn-sm" style="background-color: green; color: white">Order Confirm</button>
+                   <button id="close" type="button" class="btn btn-sm" style="background-color: red; color: white;">Close</button>
+                </div>
+        </div>
+        </form>
         <div class="col-md-1"></div>
     </div>
 
 
+    <script>
 
+        $('#order_now').click(
 
+            function(){
+                $('#appear').show();
+            }
 
+        );
 
+        $('#close').click(
 
+            function(){
+                $('#appear').hide();
+            }
 
+        );
 
-
+    </script>
 
 
 
