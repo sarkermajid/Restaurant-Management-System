@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Chefs;
 use App\Models\User;
 use App\Models\Food;
+use App\Models\Order;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -147,5 +148,11 @@ class AdminController extends Controller
         $chef_delete = Chefs::find($id);
         $chef_delete->delete();
         return redirect()->back();
+    }
+
+    public function orders(){
+
+        $customer_orders = Order::all();
+        return view('admin.orders',compact('customer_orders'));
     }
 }

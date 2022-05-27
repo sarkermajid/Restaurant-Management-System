@@ -48,6 +48,8 @@ Route::get('/remove_cart/{id}', [HomeController::class, 'remove_cart']);
 
 // for order route
 Route::post('/order_confirm', [HomeController::class, 'order_confirm']);
+//admin
+Route::get('/orders', [AdminController::class, 'orders']);
 
 
 Route::middleware([
