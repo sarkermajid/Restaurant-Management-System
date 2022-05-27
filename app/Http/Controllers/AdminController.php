@@ -9,12 +9,17 @@ use App\Models\Order;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function users(){
+        if(Auth::id() && Auth::user()->usertype == 1){
         $all_user = User::all();
         return view('admin.users', compact('all_user'));
+        }else{
+            return redirect('login');
+        }
     }
 
     public function user_delete($id){
@@ -24,8 +29,12 @@ class AdminController extends Controller
     }
 
     public function food(){
+        if(Auth::id() && Auth::user()->usertype == 1){
         $all_food = Food::all();
         return view('admin.food',compact('all_food'));
+        }else{
+            return redirect('login');
+        }
     }
 
     public function upload_food(Request $request){
@@ -92,8 +101,12 @@ class AdminController extends Controller
     }
 
     public function view_reservation(){
+        if(Auth::id() && Auth::user()->usertype == 1){
         $view_reservation = Reservation::all();
         return view('admin.reservation',compact('view_reservation'));
+        }else{
+            return redirect('login');
+        }
     }
 
     public function delete_reservation($id){
@@ -103,8 +116,12 @@ class AdminController extends Controller
     }
 
     public function chefs(){
+        if(Auth::id() && Auth::user()->usertype == 1){
         $view_chefs = Chefs::all();
         return view('admin.chefs',compact('view_chefs'));
+        }else{
+            return redirect('login');
+        }
     }
 
     public function add_chefs(Request $request){
@@ -151,8 +168,11 @@ class AdminController extends Controller
     }
 
     public function orders(){
-
+        if(Auth::id() && Auth::user()->usertype == 1){
         $customer_orders = Order::all();
         return view('admin.orders',compact('customer_orders'));
+        }else{
+            return redirect('login');
+        }
     }
 }

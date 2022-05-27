@@ -11,7 +11,9 @@
     <div class="container-scroller">
         @include('admin.navbar')
         <div>
+          <div class="col-md-2"></div>
             <div class="col-md-6">
+              <h2 class="text-white text-center mt-2">Reservation</h2>
                 <div class="mb-5">
                     <table class="table table-stripe">
                       <tr>

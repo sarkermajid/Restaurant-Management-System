@@ -14,9 +14,15 @@ use Carbon\CarbonPeriod;
 class HomeController extends Controller
 {
     public function index(){
-        $food_items_show = Food::all();
-        $all_chefs = Chefs::all();
-        return view('home',compact('food_items_show','all_chefs'));
+
+        if(Auth::id()){
+
+            return redirect('redirects');
+        }else{
+            $food_items_show = Food::all();
+            $all_chefs = Chefs::all();
+            return view('home',compact('food_items_show','all_chefs'));
+        }
     }
 
     public function redirects(){
@@ -30,7 +36,6 @@ class HomeController extends Controller
         }else{
             $user_id = Auth::id();
             $count = Cart::where('user_id',$user_id)->count();
-
             return view('home',compact('food_items_show','all_chefs','count'));
         }
     }
@@ -55,10 +60,14 @@ class HomeController extends Controller
     }
 
     public function view_cart(Request $request, $id){
+        if(Auth::id() == $id){
         $count = Cart::where('user_id',$id)->count();
         $cart_info = Cart::where('user_id',$id)->join('food','carts.food_id', '=' , 'food.id')->get();
         $cart_number_id = Cart::select('*')->where('user_id', '=', $id)->get();
         return view('view_cart',compact('count','cart_info','cart_number_id'));
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function remove_cart($id){

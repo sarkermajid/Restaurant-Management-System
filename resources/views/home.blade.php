@@ -82,7 +82,6 @@ https://templatemo.com/tm-558-klassy-cafe
                                 </ul>
                             </li> --}}
                             <li class="scroll-to-section">
-
                                 @auth
                                 <a href="{{ url('/view_cart/'. Auth::user()->id) }}">
                                     Cart  [{{ $count }}]
