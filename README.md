@@ -16,7 +16,7 @@ Restaurant-Management-System
 3. Users can contact the admin with a contact form.
 4. Users can reserve restaurants before.
 
-# Admin
+#Admin
 1. Admin can delete a user account.
 2. Admin can add new food items with the amount of food and quantity.
 3. Admin can add a new chef with name, specialty, and image.
